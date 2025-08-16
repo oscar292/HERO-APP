@@ -9,6 +9,7 @@ describe('Pruebas en authReducer', ()=>{
     })
 
     test('debe de autenticar y colocar el "name" del usuario ',()=>{
+        
         const action = {
             type: types.login,
             payload: {
@@ -30,5 +31,4 @@ describe('Pruebas en authReducer', ()=>{
         const state = authReducer({logged:true, name: 'Oscar'},action);
         expect(state).toEqual({logged: false});
     })
-
 })
