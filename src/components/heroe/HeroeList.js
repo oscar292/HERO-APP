@@ -1,8 +1,11 @@
+import { useMemo } from "react";
 import { getHeroesByPublisher } from "../../selectors/getHeroeByPublisher";
+import { HeroCard } from "./HeroeCard";
 
 export const HeroeList = ({publisher}) => {
     
-    const heroes = getHeroesByPublisher(publisher);
+    const heroes = useMemo(()=>
+        getHeroesByPublisher(publisher),[publisher]);
 
     const validPublisher = ['DC Comics', 'Marvel Comics'];
 
@@ -11,17 +14,15 @@ export const HeroeList = ({publisher}) => {
     }
 
     return (
-        <>
-            <h1>Heroe List - {publisher}</h1>
-            <ul>
-                {
-                    heroes.map(hero =>(
-                        <li key={heroes.id}>
-                            {hero.superhero}
-                        </li>
-                    ))
-                }
-            </ul>
-        </>
+        <div className="row rows-cols-1 row-cols-md-3 g-3 animate__animated animate__fadeIn">
+            {
+                heroes.map(hero =>(
+                    <HeroCard 
+                        key={hero.id} 
+                        {...hero}
+                    />
+                ))
+            }
+        </div>
     )
 }
